@@ -5,6 +5,7 @@ import android.os.CountDownTimer
 import android.text.format.DateUtils
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-        override fun onSaveInstanceState(outState: Bundle) {
+    override fun onSaveInstanceState(outState: Bundle) {
 
         if(remainingTime!=0L){
             outState.putBoolean("timer_state", true)
@@ -56,11 +57,13 @@ class MainActivity : AppCompatActivity() {
             override fun onTick(millisUntilFinished: Long) {
                 Log.i("MainActivity-TraceTimer", DateUtils.formatElapsedTime(millisUntilFinished/ONE_SECOND))
                 remainingTime = millisUntilFinished
+                tv_remaining_time.text = DateUtils.formatElapsedTime(millisUntilFinished/ONE_SECOND)
             }
 
             override fun onFinish() {
                 Log.i("MainActivity-TraceTimer", "Timer is finished.")
                 remainingTime = 0L
+                tv_remaining_time.text = DateUtils.formatElapsedTime(remainingTime/ONE_SECOND)
             }
 
         }
@@ -73,10 +76,12 @@ class MainActivity : AppCompatActivity() {
             override fun onTick(millisUntilFinished: Long) {
                 Log.i("MainActivity-TraceTimer", DateUtils.formatElapsedTime(millisUntilFinished/ONE_SECOND))
                 remainingTime = millisUntilFinished
+                tv_remaining_time.text = DateUtils.formatElapsedTime(millisUntilFinished/ONE_SECOND)
             }
             override fun onFinish() {
                 Log.i("MainActivity-TraceTimer", "Timer is finished.")
                 remainingTime = 0L
+                tv_remaining_time.text = DateUtils.formatElapsedTime(remainingTime/ ONE_SECOND)
             }
         }
         timer.start()
